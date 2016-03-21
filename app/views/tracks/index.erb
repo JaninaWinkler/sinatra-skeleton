@@ -1,0 +1,11 @@
+<% @tracks.each do |track| %>
+  <div class="track">
+    <h3>Title: <%= track.title %></h3>
+    <p> Posted By: <a href="/tracks/<%= track.id %>"><%= track.author %></a></p>
+    <p> Posted at: <%= track.created_at %></p>
+    <% if track.url.length != 0 %>
+      <a href="<%= track.url %>"><strong>To the track!</strong></a>
+    <% end %>      
+    </p>
+  </div>
+<% end %>
