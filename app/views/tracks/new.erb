@@ -10,12 +10,16 @@
   </div>
 <% end %>
   <div>
-    <label>Title:</label>
+    <label>Author:</label>
+    <input type="text" name="author" value="<%= @track.author %>">
+  </div>
+  <div>
+    <label>Track Title:</label>
     <input type="text" name="title" value="<%= @track.title %>">
   </div>
   <div>
-    <label>Author:</label>
-    <input type="text" name="author" value="<%= @track.author %>">
+    <label>Artist Name:</label>
+    <input type="text" name="artist" value="<%= @track.artist_name %>">
   </div>
   <div>
     <label>URL:</label>

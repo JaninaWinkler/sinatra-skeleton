@@ -2,6 +2,7 @@
 get '/' do
   erb :index
 end
+
 get '/tracks' do
   @tracks = Track.all
   erb :'tracks/index'
@@ -12,17 +13,24 @@ get '/tracks/new' do
   erb :'tracks/new'
 end
 
-get '/tracks/:id' do
-  @track = Track.find params[:id]
-  erb :'tracks/show'
+# get '/tracks/:id' do
+#   @track = Track.find params[:id]
+#   erb :'tracks/show'
+# end
+
+get '/tracks/:author' do
+  @author = params[:author]
+  @tracks = Track.where(:author => params[:author])
+  erb :'tracks/author'
 end
 
 
 post '/tracks' do 
   @track = Track.new(
     created_at: params[:created_at],
-    title: params[:title],
     author: params[:author],
+    artist_name: params[:artist],
+    title: params[:title],
     url: params[:url]
   ) 
   if @track.save

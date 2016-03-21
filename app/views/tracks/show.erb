@@ -1,0 +1,21 @@
+<H1>
+  Author: <%= @tracks.author %>
+</H1>
+
+<p>
+  Posted at: <%= @tracks.created_at %>
+</p>
+
+<p>
+  <%= @tracks.content %>
+</p>
+
+<p> 
+  <% if @tracks.url.length != 0 %>
+    <a href="<%= @tracks.url %>">To the track!</a>
+  <% end %>  
+</p>
+
+<hr/>
+<a href="/messages/author/<%= @message.author %>">Other Messages From This Author</a>
+<a href="/messages">Back to All Messages</a> 

@@ -1,0 +1,18 @@
+<H1> All Tracks Posted by <%= @author %> </H1>
+<% @tracks.each do |track| %>
+  
+  <div class="track">
+    <h3>Title: <%= track.title %></h3>
+    <p> Artist Name: <%= track.artist_name %></p>
+    <p> Posted at: <%= track.created_at %></p>
+    <p>
+    <% if track.url.length != 0 %>
+      <a href="<%= track.url %>">Take me to the track!</a>
+    <% end %>      
+    </p>
+  </div>
+
+<% end %>
+
+<hr/>
+
