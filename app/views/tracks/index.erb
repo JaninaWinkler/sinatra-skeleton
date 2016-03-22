@@ -1,12 +1,19 @@
+<%if params[:user_id] %>
+  <H1> All Tracks Posted by <%= @tracks.first.user.username %> </H1>
+<% end %> 
 <% @tracks.each do |track| %>
   <div class="track">
-    <h3>Title: <%= track.title %></h3>
+    <h3>Title: <a href="/tracks/<%= track.id %>"><%= track.title %></a></h3>
     <p> Artist Name: <%= track.artist_name %></p>
-    <p> Posted By: <a href="/tracks/<%= track.user.id %>"><%= track.user.username %></a></p>
+    <p> Posted By: <a href="/tracks?user_id=<%= track.user.id %>"><%= track.user.username %></a></p>
     <p> Posted at: <%= track.created_at.strftime("%m/%d/%Y") %></p>
     <% if track.url.length != 0 %>
       <a href="<%= track.url %>"><strong>Take me to the snazzy track!</strong></a>
-    <% end %>      
-    </p>
+    <% end %>
+    <p> Number of Upvotes: <%= track.num_votes %></p> 
+    <form action="/upvote" method="POST">
+      <input type="hidden" name="track_id" value="<%= track.id %>">
+        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-music"></span>        UPVOTE</button>
+    </form>
   </div>
 <% end %>

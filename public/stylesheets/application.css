@@ -1,0 +1,12 @@
+body {
+  background: url('c010076c-94a9-4e48-a038-db4eb7cf50d01.jpg') no-repeat;
+  background-size: cover;
+}
+
+.jumbotron {
+  background: rgba(0, 0, 0, 0.10);
+}
+
+.btn:visited {
+  color: blue;
+}

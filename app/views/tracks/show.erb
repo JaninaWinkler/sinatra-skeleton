@@ -1,21 +1,14 @@
-<H1>
-  Author: <%= @tracks.author %>
-</H1>
-
-<p>
-  Posted at: <%= @tracks.created_at %>
-</p>
-
-<p>
-  <%= @tracks.content %>
-</p>
-
-<p> 
-  <% if @tracks.url.length != 0 %>
-    <a href="<%= @tracks.url %>">To the track!</a>
-  <% end %>  
-</p>
-
-<hr/>
-<a href="/messages/author/<%= @message.author %>">Other Messages From This Author</a>
-<a href="/messages">Back to All Messages</a> 
+<div class="track">
+    <h3>Title: <a href="/tracks/<%= @track.id %>"><%= @track.title %></a></h3>
+    <p> Artist Name: <%= @track.artist_name %></p>
+    <p> Posted By: <a href="/tracks?user_id=<%= @track.user.id %>"><%= @track.user.username %></a></p>
+    <p> Posted at: <%= @track.created_at.strftime("%m/%d/%Y") %></p>
+    <% if @track.url.length != 0 %>
+      <a href="<%= @track.url %>"><strong>Take me to the snazzy track!</strong></a>
+    <% end %>
+    <p> Number of Upvotes: <%= @track.num_votes %></p> 
+    <form action="/upvote" method="POST">
+      <input type="hidden" name="track_id" value="<%= @track.id %>">
+        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-music"></span>        UPVOTE</button>
+    </form>
+  </div>

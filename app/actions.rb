@@ -12,6 +12,9 @@ end
 
 get '/tracks' do
   @tracks = Track.all
+  if params[:user_id]
+    @tracks = @tracks.where(user_id: params[:user_id])
+  end
   erb :'tracks/index'
 end
 
@@ -20,10 +23,9 @@ get '/tracks/new' do
   erb :'tracks/new'
 end
 
-get '/tracks/:user_id' do
-  @user = User.find(params[:user_id])
-  @tracks = @user.tracks
-  erb :'tracks/user_tracks'
+get '/tracks/:id' do
+  @track = Track.find params[:id]
+  erb :'tracks/show'
 end
 
 post '/tracks' do 
@@ -53,18 +55,18 @@ post '/login' do
       session[:user_id] = @user.id
       redirect '/tracks'
     else
-      @message = "Invalid password."
+      @message = "Invalid password"
       redirect "/login?message=#{@message}"
     end
   else
-    @message = "Invalid username."
+    @message = "Invalid username"
     redirect "/login?message=#{@message}"
   end
 end
 
 delete '/login' do
   session[:user_id] = nil
-  redirect "/tracks?message=Logged out."
+  redirect "/tracks?message=Logged out"
 end
 
 get '/signup' do
@@ -77,9 +79,9 @@ post '/signup' do
     password: params[:password])
     if @user.save
       session[:user_id] = @user.id
-      @message = "Account created!"
+      @message = "Account created"
       puts "#{@message}"
-      redirect "/tracks?message=#{@message}."
+      redirect "/tracks?message=#{@message}"
     else
       erb :'/signup'
     end
@@ -88,4 +90,15 @@ end
 get '/logout' do
   session.clear
   redirect '/'
+end
+
+post '/upvote' do
+  @upvote = Upvote.new(user_id: current_user.id, track_id: params[:track_id])
+  if @upvote.save
+      @message = "Upvote successful"
+      redirect "/tracks?message=#{@message}"
+    else 
+      @message = "Can only upvote once"
+      redirect "/tracks?message=#{@message}"
+  end
 end
