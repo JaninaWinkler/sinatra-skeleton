@@ -18,14 +18,9 @@ get '/tracks' do
   erb :'tracks/index'
 end
 
-get '/tracks/new' do
+get '/new' do
   @track = Track.new
   erb :'tracks/new'
-end
-
-get '/tracks/:id' do
-  @track = Track.find params[:id]
-  erb :'tracks/show'
 end
 
 post '/tracks' do 
@@ -53,7 +48,8 @@ post '/login' do
   if @user 
     if @user && @user.password == params[:password]
       session[:user_id] = @user.id
-      redirect '/tracks'
+      @message = "Login successful"
+      redirect "/?message=#{@message}"
     else
       @message = "Invalid password"
       redirect "/login?message=#{@message}"
@@ -88,7 +84,7 @@ post '/signup' do
 end
 
 get '/logout' do
-  session.clear
+  session[:user_id] = nil
   redirect '/'
 end
 
@@ -101,4 +97,20 @@ post '/upvote' do
       @message = "Can only upvote once"
       redirect "/tracks?message=#{@message}"
   end
+end
+
+post '/review' do
+  @review = Review.new(user_id: current_user.id, track_id: params[:track_id])
+  if @review.save
+      @message = "Review post successful"
+      redirect "/tracks/id?message=#{@message}"
+    else 
+      @message = "Review post failed"
+      redirect "/tracks/id?message=#{@message}"
+  end
+end
+
+get '/tracks/:id' do
+  @track = Track.find params[:id]
+  erb :'tracks/show'
 end

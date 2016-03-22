@@ -7,13 +7,13 @@
     <p> Artist Name: <%= track.artist_name %></p>
     <p> Posted By: <a href="/tracks?user_id=<%= track.user.id %>"><%= track.user.username %></a></p>
     <p> Posted at: <%= track.created_at.strftime("%m/%d/%Y") %></p>
-    <% if track.url.length != 0 %>
-      <a href="<%= track.url %>"><strong>Take me to the snazzy track!</strong></a>
-    <% end %>
     <p> Number of Upvotes: <%= track.num_votes %></p> 
     <form action="/upvote" method="POST">
       <input type="hidden" name="track_id" value="<%= track.id %>">
         <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-music"></span>        UPVOTE</button>
+    <% if track.url.length != 0 %>
+      <a href="<%= track.url %>"><strong>Take me to the snazzy track!</strong></a>
+    <% end %>
     </form>
   </div>
 <% end %>

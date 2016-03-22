@@ -4,6 +4,7 @@ class Upvote < ActiveRecord::Base
   belongs_to :track
 
   validate :can_only_upvote_once 
+  
   after_create :increase_track_upvotes
 
   def can_only_upvote_once

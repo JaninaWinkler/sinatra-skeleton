@@ -7,6 +7,6 @@ body {
   background: rgba(0, 0, 0, 0.10);
 }
 
-.btn:visited {
-  color: blue;
+.dropdown {
+  position: relative;
 }

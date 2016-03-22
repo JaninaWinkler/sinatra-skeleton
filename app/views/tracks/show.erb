@@ -7,8 +7,31 @@
       <a href="<%= @track.url %>"><strong>Take me to the snazzy track!</strong></a>
     <% end %>
     <p> Number of Upvotes: <%= @track.num_votes %></p> 
-    <form action="/upvote" method="POST">
-      <input type="hidden" name="track_id" value="<%= @track.id %>">
-        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-music"></span>        UPVOTE</button>
+
+    <form action="/review" method="POST">
+      <div class="form-group">
+        <div class="col-lg">
+          <input type="review" name="review" class="form-control"placeholder="Your Review">
+        </div>
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Rating   :
+        <span class="caret"></span>
+      </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+          <input type="hidden" name="track_id" value="<%= @track.id %>">
+            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-music"></span>        Leave Review!</button>
+        </div>
+      </div>
     </form>
+  </div>
+  <div class="review">
   </div>
