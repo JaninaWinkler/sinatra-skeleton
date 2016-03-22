@@ -2,10 +2,10 @@
   <div class="track">
     <h3>Title: <%= track.title %></h3>
     <p> Artist Name: <%= track.artist_name %></p>
-    <p> Posted By: <a href="/tracks/<%= track.author %>"><%= track.author %></a></p>
+    <p> Posted By: <a href="/tracks/<%= track.user.id %>"><%= track.user.username %></a></p>
     <p> Posted at: <%= track.created_at.strftime("%m/%d/%Y") %></p>
     <% if track.url.length != 0 %>
-      <a href="<%= track.url %>"><strong>Take me to the track!</strong></a>
+      <a href="<%= track.url %>"><strong>Take me to the snazzy track!</strong></a>
     <% end %>      
     </p>
   </div>

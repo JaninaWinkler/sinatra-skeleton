@@ -1,0 +1,23 @@
+<% if @user && @user.errors.any? %>
+  <div>
+    <strong>Oops! Please fix your track posting:</strong>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<nav class="navbar navbar-default">
+  <a class="navbar-brand">Sign Up for Snazzy Tracks</a>
+</nav>
+
+<form method="POST" action="/signup">
+  <input type="text" name="username" placeholder="Enter Username"></input>
+  <input type="password" name="password" placeholder="Enter Password"></input>
+  <input type="submit" value="Sign Up"></input>
+</form>
+
+
+

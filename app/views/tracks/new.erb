@@ -9,23 +9,22 @@
     </ul>
   </div>
 <% end %>
-  <div>
-    <label>Author:</label>
-    <input type="text" name="author" value="<%= @track.author %>">
-  </div>
-  <div>
-    <label>Track Title:</label>
-    <input type="text" name="title" value="<%= @track.title %>">
-  </div>
-  <div>
-    <label>Artist Name:</label>
-    <input type="text" name="artist" value="<%= @track.artist_name %>">
-  </div>
-  <div>
-    <label>URL:</label>
-    <input type="text" name="url" value="<%= @track.url %>">
-  </div>
-  <div>
-    <input type="submit" value="Submit">
-  </div>
+
+<div class="input-group input-group-lg">
+  <span class="input-group-addon" id="sizing-addon2">♫🎼</span>
+  <input type="text" class="form-control" placeholder="Track Title" aria-describedby="sizing-addon2" name="title" value="<%= @track.title %>">
+</div>
+
+<div class="input-group input-group-lg">
+  <span class="input-group-addon" id="sizing-addon3">🎼♫</span>
+  <input type="text" class="form-control" placeholder="Track Artist" aria-describedby="sizing-addon3" name="artist" value="<%= @track.artist_name %>">
+</div>
+<div class="input-group input-group-lg">
+  <span class="input-group-addon" id="sizing-addon3">###</span>
+  <input type="text" class="form-control" placeholder="Link" aria-describedby="sizing-addon3" name="url" value="<%= @track.url %>">
+</div>
+<div class="input-group input-group-lg">
+ <input type="submit" class="form-control" placeholder="Submit" aria-describedby="sizing-addon3" value="Submit">
+</div>
 </form>
+

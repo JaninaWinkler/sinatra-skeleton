@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default">
+  <a class="navbar-brand">Login to Snazzy Tracks</a>
+</nav>
+
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+ <div class="nav navbar-left">
+ <% if session[:user_id] %>
+   <%= current_user.username %>
+ <% else %>
+  <% if @message %> 
+    <%= @message %>
+  <% end %>
+   <form class="navbar navbar-left" method="POST" action="/login">
+     <input type="text" name="username" placeholder="Your Username"></input>
+     <input type="password" name="password" placeholder="Your Password"></input>
+     <input type="submit" value="Log In"></input>
+   </form>
+ <% end %>
+ </div>
+</div>
