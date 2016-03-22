@@ -9,29 +9,31 @@
     <p> Number of Upvotes: <%= @track.num_votes %></p> 
 
     <form action="/review" method="POST">
-      <div class="form-group">
+      <div class="form-group" style="max-width:20%;">
         <div class="col-lg">
-          <input type="review" name="review" class="form-control"placeholder="Your Review">
+          <input type="text" name="content" class="form-control" placeholder="Your Review">
         </div>
-    <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     Rating   :
-        <span class="caret"></span>
-      </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
+      <select class="form-control" name="rating" style="max-width:47%;">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
           <input type="hidden" name="track_id" value="<%= @track.id %>">
             <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-music"></span>        Leave Review!</button>
         </div>
       </div>
     </form>
-  </div>
+    <% @track.reviews.each do |review| %>
   <div class="review">
+    <p>Review: <%= review.content %></p>
+    <p> Rating: <%= review.rating %></p>
+    <% if review.user.tracks.empty? %>
+      <p> Posted By: <%= review.user.username %></p>
+    <% else %>
+      <p> Posted By: <a href="/tracks?user_id=<%= review.user.id %>"><%= review.user.username %></a></p>
+    <% end %> 
+  <% end %>
   </div>

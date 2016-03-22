@@ -100,13 +100,13 @@ post '/upvote' do
 end
 
 post '/review' do
-  @review = Review.new(user_id: current_user.id, track_id: params[:track_id])
+  @review = Review.new(user_id: current_user.id, track_id: params[:track_id], content: params[:content], rating: params[:rating])
   if @review.save
       @message = "Review post successful"
-      redirect "/tracks/id?message=#{@message}"
+      redirect "/tracks/#{params[:track_id]}?message=#{@message}"
     else 
       @message = "Review post failed"
-      redirect "/tracks/id?message=#{@message}"
+      redirect "/tracks/#{params[:track_id]}?message=#{@message}"
   end
 end
 
