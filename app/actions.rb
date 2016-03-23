@@ -4,6 +4,15 @@ helpers do
       User.find(session[:user_id])
     end
   end
+
+  def already_reviewed?(track)
+    !track.reviews.where(user_id: current_user).empty?
+  end
+
+  def not_logged_in?
+    current_user.nil?
+  end
+
 end
 
 get '/' do
@@ -12,6 +21,7 @@ end
 
 get '/tracks' do
   @tracks = Track.all
+  @tracks = @tracks.order('num_votes DESC')
   if params[:user_id]
     @tracks = @tracks.where(user_id: params[:user_id])
   end
@@ -112,5 +122,6 @@ end
 
 get '/tracks/:id' do
   @track = Track.find params[:id]
+  @reviews = @track.reviews.order('created_at DESC')  
   erb :'tracks/show'
 end

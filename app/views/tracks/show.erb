@@ -8,6 +8,11 @@
     <% end %>
     <p> Number of Upvotes: <%= @track.num_votes %></p> 
 
+  <% if not_logged_in? %>
+    <p>Please <a href="/login">Log In</a> or <a href="/signup">Sign Up</a> to post a review.</p>
+  <% elsif already_reviewed?(@track) %>
+    <p><strong> You've already reviewed this track. </strong></p>
+  <% else %>
     <form action="/review" method="POST">
       <div class="form-group" style="max-width:20%;">
         <div class="col-lg">
@@ -26,7 +31,9 @@
         </div>
       </div>
     </form>
-    <% @track.reviews.each do |review| %>
+  <% end %>
+
+<% @reviews.each do |review| %>
   <div class="review">
     <p>Review: <%= review.content %></p>
     <p> Rating: <%= review.rating %></p>
